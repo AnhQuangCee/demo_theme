@@ -17,22 +17,15 @@ class MyApp extends StatelessWidget {
       theme: DAppTheme.lightTheme,
       darkTheme: DAppTheme.darkTheme,
       themeMode: ThemeMode.system,
-      home: const MyHomePage(title: 'Flutter Demo Theme'),
+      home: const MyHomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  bool themeMode = true;
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text('Flutter Demo Theme'),
       ),
       body: Center(
         child: Column(
@@ -64,13 +57,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     style: theme.textTheme.bodyMedium,
                   ),
                   Switch(
-                    value: themeMode,
+                    value: Get.isDarkMode ? true : false,
                     activeColor: theme.colorScheme.primary,
                     onChanged: (bool value) {
-                      setState(() {
-                        themeMode = value;
-                      });
-
                       Get.isDarkMode
                           ? Get.changeTheme(DAppTheme.lightTheme)
                           : Get.changeTheme(DAppTheme.darkTheme);
